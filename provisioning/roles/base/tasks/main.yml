@@ -1,0 +1,16 @@
+---
+# This role deals with the basic, ie.: os updates, common services, etc
+- name: Install required packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ required_packages }}"
+  when: required_packages
+
+- name: Make sure required services are up & running
+  service:
+    name: "{{ item }}"
+    enabled: yes
+    state: started
+  with_items: "{{ required_services }}"
+  when: required_services

@@ -1,0 +1,7 @@
+# These packages to be installed
+required_packages:
+  - docker
+
+# These services to be started & enabled
+required_services:
+  - docker
