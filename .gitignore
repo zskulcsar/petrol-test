@@ -4,3 +4,6 @@
 # Ansible
 **/*.retry
 **/venv
+
+# Build artifacts
+**/build

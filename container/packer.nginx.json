@@ -1,0 +1,15 @@
+{
+  "builders":[
+    {
+      "type": "docker",
+      "image": "alpine:latest",
+      "export_path": "build/petrol-nginx.tar",
+      "changes": [
+        "CMD [\"nginx\", \"-g\", \"daemon off;\"]",
+        "EXPOSE 80 443",
+        "ENV HOSTNAME https.test"
+      ],
+      "run_command": ["-d", "-i", "-t", "{{.Image}}", "/bin/sh"]
+    }
+  ]
+}
