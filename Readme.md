@@ -74,6 +74,6 @@ clean -> container -> host
 
 ## Sidenote
 
-Originally, I tried to make this work with [ansible-container](https://docs.ansible.com/ansible-container/) as it provides a better way of handling the installation steps than docker's Dockerfile. However ... with the latest docker the ansible-container build fails. After some investigation it turned out that the when the `--debug` flag is set the running code is actually different see: ![--debug](https://github.com/zskulcsar/petrol-test/doc/debug_fail.png).
+Originally, I tried to make this work with [ansible-container](https://docs.ansible.com/ansible-container/) as it provides a better way of handling the installation steps than docker's Dockerfile. However ... with the latest docker the ansible-container build fails. After some investigation it turned out that the when the `--debug` flag is set the running code is actually different see: ![--debug](https://github.com/zskulcsar/petrol-test/blob/master/doc/debug_fail.png).
 
 An issue was raised: (https://github.com/ansible/ansible-container/issues/937) along with a pull request (https://github.com/ansible/ansible-container/pull/938) for the ansible-container maintainers to accept.
