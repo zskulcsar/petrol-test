@@ -14,6 +14,7 @@
     nginx_ppa_use: true
     nginx_ppa_version: stable
     nginx_docroot: /var/www/html
+    server_hostname: http.test
 
   roles:
     - nginx
