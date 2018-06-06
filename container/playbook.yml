@@ -1,0 +1,34 @@
+---
+- hosts: all
+  user: root
+  gather_facts: false
+
+  vars:
+    # Packages required
+    prereq_packages:
+      - python2
+      
+    # Nginx settings.
+    nginx_vhosts: []
+    nginx_remove_default_vhost: true
+    nginx_ppa_use: true
+    nginx_ppa_version: stable
+    nginx_docroot: /var/www/html
+
+  roles:
+    - nginx
+
+  # The fact that we need to rely on a vanilla alpine makes things a bit harder than necessary
+  #   ie.: we need to install python for ansible to work
+  pre_tasks:
+    - name: Update apk package list
+      raw: apk update
+
+    - name: Installing dependencies
+      raw: apk add {{ item }}
+      with_items: "{{ prereq_packages }}"
+
+  post_tasks:
+    - name: Clean-up unwanted packages
+      raw: apk del {{ item }}
+      with_items: "{{ prereq_packages }}"

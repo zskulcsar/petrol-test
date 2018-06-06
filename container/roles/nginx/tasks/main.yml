@@ -1,0 +1,21 @@
+---
+# This role configures the nginx as we would like to see
+- name: Install nginx
+  command: apk add nginx
+
+- name: Ensure docroot exists.
+  file:
+    path: "{{ nginx_docroot }}"
+    state: directory
+
+- name: Copy example index.html file in place.
+  copy:
+    src: index.html
+    dest: "{{ nginx_docroot }}/index.html"
+    mode: 0755
+
+- name: Copy Nginx server configuration in place.
+  template:
+    src: default.conf.j2
+    dest: /etc/nginx/conf.d/default.conf
+    mode: 0644

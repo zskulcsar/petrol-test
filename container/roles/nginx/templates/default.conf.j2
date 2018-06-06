@@ -1,0 +1,8 @@
+# NGINX default conf
+
+server {
+    listen 80 default_server;
+    server_name {{ server_hostname }};
+    root {{ nginx_docroot }};
+    index index.html;
+}

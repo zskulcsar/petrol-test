@@ -6,5 +6,12 @@
       "export_path": "build/petrol-nginx.tar",
       "run_command": ["-d", "-i", "-t", "{{.Image}}", "/bin/sh"]
     }
+  ],
+  "provisioners":[
+    {
+      "type": "ansible",
+      "playbook_file": "playbook.yml",
+      "extra_arguments": [ "-v" ]
+    }
   ]
 }
