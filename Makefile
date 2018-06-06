@@ -8,6 +8,7 @@ help:
 	@echo "  host          : provision the guest VM with vagrant & ansible (vagrant up)"
 	@echo "  clean         : deletes the vagrant VM, the container image and the virtualenv"
 	@echo "  build         : starts from clean and does all the previous steps"
+	@echo "  test          : checks whether content is being served on port 8080"
 	@echo "  host-down     : deletes the vagrant VM"
 
 # Configures the virtual environment
@@ -44,6 +45,10 @@ host-down:
 	cd host && \
 	vagrant destroy -f
 
+.PHONY: test
+test:
+	@echo "Checking for service"
+	./test.sh
 
 .PHONY: build
 build: clean env container host

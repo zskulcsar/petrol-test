@@ -10,9 +10,9 @@
    * Write playbook/playbooks to:
      * [x] Install and start docker
      * [x] Build a docker container based on the official Alpine Linux container (library/alpine:latest)
-     * [] Build the container so that nginx is installed and started
-     * [] Configure nginx to serve out some static “Hello World” content
-     * [] Start the container as a micro service
+     * [x] Build the container so that nginx is installed and started
+     * [x] Configure nginx to serve out some static “Hello World” content
+     * [x] Start the container as a micro service
 
 ### Test Criteria:
    * At the end of the provisioning the URL to the web page should be available from the hosting OS
@@ -37,6 +37,25 @@ The solution uses [ansible](https://www.ansible.com/), [vagrant](https://www.vag
  * create a docker image (packer, docker, ansible) and export it as a tar file to be imported into the host
  * create a host VM (vagrant, ansible, docker) to run the image created in the previous step
 
+## Usage
+
+in the root of the project please run make. It should produce the following output:
+```
+zsoltk$ make
+Run make -s <target> where <target> is:
+  env           : create virtualenv in folder venv & install dependencies
+  container     : create and export the container using packer (packer build)
+  host          : provision the guest VM with vagrant & ansible (vagrant up)
+  clean         : deletes the vagrant VM, the container image and the virtualenv
+  build         : starts from clean and does all the previous steps
+  test          : checks whether content is being served on port 8080
+  host-down     : deletes the vagrant VM
+```
+
+Normally you should run `make build` but if you want you can run the steps one-by-one:
+clean -> container -> host
+
+
 ### Rationale
 
 The following design decisions were made:
@@ -55,22 +74,6 @@ The following design decisions were made:
 #### Make
  * easy and yet simple to manage interface over bash scripts.
  * hides complexity from the end user
-
-## Usage
-
-in the root of the project please run make. It should produce the following output:
-```
-zsoltk$ make
-Run make -s <target> where <target> is:
-  env           : create virtualenv in folder venv & install dependencies
-  container     : create and export the container using packer (packer build)
-  host          : provision the guest VM with vagrant & ansible (vagrant up)
-  clean         : deletes the vagrant VM, the container image and the virtualenv
-  build         : starts from clean and does all the previous steps
-```
-
-Normally you should run `make build` but if you want you can run the steps one-by-one:
-clean -> container -> host
 
 ## Sidenote
 
