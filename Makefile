@@ -8,6 +8,7 @@ help:
 	@echo "  host          : provision the guest VM with vagrant & ansible (vagrant up)"
 	@echo "  clean         : deletes the vagrant VM, the container image and the virtualenv"
 	@echo "  build         : starts from clean and does all the previous steps"
+	@echo "  host-down     : deletes the vagrant VM"
 
 # Configures the virtual environment
 # Due to bug https://github.com/ansible/ansible-container/issues/919 pip needs to be forced to 9.0.3
@@ -35,6 +36,14 @@ host:
 	source $(ENV_DIR)/bin/activate && \
 	cd host && \
 	vagrant up
+
+.PHONY: host-down
+host-down:
+	@echo "Destroying vagrant box"
+	source $(ENV_DIR)/bin/activate && \
+	cd host && \
+	vagrant destroy -f
+
 
 .PHONY: build
 build: clean env container host
